@@ -27,6 +27,13 @@ export default {
   methods: {
     deleteSmoothie(id){
       console.log(id);
+      db.collection('smoothies').doc(id).delete()
+      .then(() => {
+        //Una vez eliminado de firebase, lo quitamos del array para actualizar el front
+        this.smoothies = this.smoothies.filter(smoothie => {
+          return smoothie.id != id
+        })
+      })
     }
   },
   created(){
